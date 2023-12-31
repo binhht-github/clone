@@ -87,12 +87,6 @@ function HomeTabs({ navigation }) {
                     tabBarLabel: '',
                     // tabBarBadge: 3,
                     tabBarIcon: () => (
-
-                        // <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} >
-                        //     <Text >
-                        //         Sign in with Facebook
-                        //     </Text>
-                        // </LinearGradient>
                         <View
                             style={{
                                 backgroundColor: 'red',

@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     navigationMenu: {
         flexDirection: 'row',
         width: '100%',
-        backgroundColor: 'green',
+        // backgroundColor: 'green',
         justifyContent: 'space-between',
         alignItems: 'center',
         height: 40,

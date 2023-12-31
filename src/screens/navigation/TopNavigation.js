@@ -1,19 +1,44 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-// import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { View, Text, Dimensions } from 'react-native';
 
-// const Tab = createMaterialTopTabNavigator();
-const TestScreen = () => {
-    console.log('test screen');
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+function HomeScreen() {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'green' }}>
+            <Text>Home!</Text>
+        </View>
+    );
 }
+
+function SettingsScreen() {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'red' }}>
+            <Text>Settings!</Text>
+        </View>
+    );
+}
+
+const TabTop = createMaterialTopTabNavigator();
+
 function TopNavigation() {
     return (
-        <View>
-            {/* <Tab.Navigator>
-                <Tab.Screen name="Home" component={HomeScreen} />
-                <Tab.Screen name="Settings" component={SettingsScreen} />
-            </Tab.Navigator> */}
-        </View>
+        <NavigationContainer>
+            <View style={{ width: windowWidth, height: windowHeight, flexDirection: 'row' }}>
+                <Text>bbbb</Text>
+                <TabTop.Navigator screenOptions={{
+                    tabBarItemStyle: { width: 100, },
+                    tabBarStyle: { backgroundColor: "blue" },
+                    tabBarLabelStyle: { color: 'white' }
+                }}>
+                    <TabTop.Screen name="Tab1" component={HomeScreen} />
+                    <TabTop.Screen name="Tab2" component={SettingsScreen} />
+                </TabTop.Navigator>
+            </View>
+        </NavigationContainer >
     );
 }
 

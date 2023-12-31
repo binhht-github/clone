@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, FlatList, Button, ScrollView } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -8,7 +8,6 @@ import ContenInteract from './ContenInteract';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height - 70;
-
 const ContentItem = () => {
     return (
         <View>
@@ -17,22 +16,46 @@ const ContentItem = () => {
     );
 }
 
+// const curentOffset = 0;
+
 
 
 function Content(props) {
-    const { posts } = props;
+    const { posts, index } = props;
 
     const t = () => {
         console.log(items)
     }
+
+    // const stepScoll = useRef(null)
+
+    // useEffect(() => {
+    //     if (posts.length > 0) {
+    //         let indexScroll = 2
+    //         setInterval(() => {
+    //             stepScoll.current.scrollTo({
+    //                 x: 0,
+    //                 y: index * windowHeight,
+    //                 animated: true,
+    //             })
+    //             // index += 1;
+    //         }, 500)
+
+    //         // this.refs.scrollView.scrollTo({ x: 0, y: 0, animated: true })
+    //     }
+    // }, [posts])
 
     const handlScoll = (e) => {
         if (!e) { return }
         const { nativeEvent } = e
         if (nativeEvent && nativeEvent.contentOffset) {
             const currenOffset = nativeEvent.contentOffset.y;
-
+            let itemIndex = 0;
+            if (currenOffset > 0) {
+                itemIndex = Math.floor((currenOffset + windowHeight / 2) / windowHeight);
+            }
             // console.log(currenOffset);
+            // console.log(itemIndex);
         }
     }
 
@@ -40,14 +63,18 @@ function Content(props) {
     return (
         // content
         <View style={styles.contents}>
-            <View style={styles.contentBody} onLayout={(event) => {
-                const { width, height } = event.nativeEvent.layout;
-                console.log("Body " + width + " " + height + " " + windowHeight)
-            }}>
+            <View
+                style={styles.contentBody}
+            // onLayout={(event) => {
+            //     const { width, height } = event.nativeEvent.layout;
+            //     console.log("Body " + width + " " + height + " " + windowHeight)
+            // }}
+            >
                 <ScrollView
                     pagingEnabled
                     scrollEventThrottle={16}
                     onScroll={handlScoll}
+                    // ref={stepScoll}
                     contentContainerStyle={{ width: windowWidth, height: windowHeight * posts.length, backgroundColor: 'blue' }}
                 >
                     {
@@ -64,7 +91,7 @@ function Content(props) {
                                             style={{
                                                 // width: '100%',
                                                 height: '100%',
-                                                resizeMode: 'contain',
+                                                resizeMode: 'stretch',
 
                                             }}
                                             source={{ uri: `${item.duongdan}`, }}
@@ -120,8 +147,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         backgroundColor: '#000',
         // backgroundColor: 'hsla(23,80%,80%,0.8)',
-        borderWidth: 0.55,
-        borderColor: '#ffffff'
+        // borderWidth: 0.55,
+        // borderColor: '#ffffff'
     },
 
 })
