@@ -8,42 +8,9 @@ import ContenInteract from './ContenInteract';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height - 70;
-const ContentItem = () => {
-    return (
-        <View>
-            <Text>Item</Text>
-        </View>
-    );
-}
-
-// const curentOffset = 0;
-
-
 
 function Content(props) {
-    const { posts, index } = props;
-
-    const t = () => {
-        console.log(items)
-    }
-
-    // const stepScoll = useRef(null)
-
-    // useEffect(() => {
-    //     if (posts.length > 0) {
-    //         let indexScroll = 2
-    //         setInterval(() => {
-    //             stepScoll.current.scrollTo({
-    //                 x: 0,
-    //                 y: index * windowHeight,
-    //                 animated: true,
-    //             })
-    //             // index += 1;
-    //         }, 500)
-
-    //         // this.refs.scrollView.scrollTo({ x: 0, y: 0, animated: true })
-    //     }
-    // }, [posts])
+    const { posts } = props;
 
     const handlScoll = (e) => {
         if (!e) { return }
@@ -59,16 +26,11 @@ function Content(props) {
         }
     }
 
-
     return (
         // content
         <View style={styles.contents}>
             <View
                 style={styles.contentBody}
-            // onLayout={(event) => {
-            //     const { width, height } = event.nativeEvent.layout;
-            //     console.log("Body " + width + " " + height + " " + windowHeight)
-            // }}
             >
                 <ScrollView
                     pagingEnabled
@@ -89,16 +51,13 @@ function Content(props) {
                                             width={windowWidth}
                                             height={windowHeight}
                                             style={{
-                                                // width: '100%',
                                                 height: '100%',
                                                 resizeMode: 'stretch',
-
                                             }}
                                             source={{ uri: `${item.duongdan}`, }}
                                         />
                                     </View>
                                     <ContenInteract
-                                        // name={item.userName}
                                         id={item.id}
                                         userName={item.userName}
                                         title={item.title}
@@ -115,16 +74,12 @@ function Content(props) {
                                         saveCheck={item.saveCheck}
                                         saveQuantity={item.saveQuantity}
                                         shareQuantity={item.shareQuantity}
-
                                     />
-                                    {/* <Text style={{ color: 'white' }}>{item.userName}</Text> */}
                                 </View>
                             );
                         })
                     }
                 </ScrollView>
-
-
             </View>
         </View>
     );
@@ -140,15 +95,11 @@ const styles = StyleSheet.create({
     contentBody: {
         height: windowHeight,
         width: Dimensions.get('window').width,
-        // backgroundColor: 'blue',
     },
     contentItem: {
         height: windowHeight,
         width: Dimensions.get('window').width,
         backgroundColor: '#000',
-        // backgroundColor: 'hsla(23,80%,80%,0.8)',
-        // borderWidth: 0.55,
-        // borderColor: '#ffffff'
     },
 
 })
