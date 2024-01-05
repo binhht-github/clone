@@ -1,83 +1,258 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import LottieView from 'lottie-react-native';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Modal, Button, TextInput, ScrollView } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 const widthWindown = Dimensions.get('window').width;
 
 function ContenInteract(props) {
-    const { id,
+    const { postID,
         userName,
         title,
         hashtag,
-        potsType,
-        music,
         avtImg,
-        duongdan,
         musicImg,
-        tymCheck,
-        tymQuantity,
-        cmtId,
-        cmtQuantity,
-        saveCheck,
-        saveQuantity,
-        shareQuantity, } = props
+        checkTymUi,
+        checkSaveUI,
+        countTym,
+        countSave,
+        countCmt,
+        setPosts,
+        setLikeState,
+        setSaveState
+    } = props
 
+    // let checkSaveUI;
+
+
+    const [comments, setComments] = useState([])
+    const [text, setText] = useState('');
     const [uiState, setUiState] = useState({
-        tymUI: tymCheck,
-        saveUI: saveCheck,
-        modalVisible: false
+        tymUI: checkTymUi,
+        saveUI: checkSaveUI,
+        modalVisible: false,
+        cmtBtn: false,
+        countCmt: countCmt,
+        countTym: countTym,
+        countSave: countSave
     })
+    const animationRef = useRef(null);
+
+
+
+    // console.log('check save = ', checkSaveUI)
 
     const tuochHandle = (userId, postId, key) => {
         if (key === "like") {
-            setUiState({
-                ...uiState,
-                tymUI: !uiState.tymUI
-            })
+            // setUiState({
+            //     ...uiState,
+            //     tymUI: !uiState.tymUI
+            // })
+            handleLikePost(postId)
         }
         if (key === "cmt") {
             setUiState({
                 ...uiState,
                 modalVisible: !uiState.modalVisible
             })
-            // setModalVisible(true)}>
+
+            if (!uiState.modalVisible) {
+                axios.get(`http://192.168.1.2:3000/comments/?_expand=user&postId=${postID}`)
+                    .then((res) => {
+                        setComments(res.data)
+                    })
+                    .catch(e => { console.log(e); })
+            }
         }
+
         if (key === "save") {
-            setUiState({
-                ...uiState,
-                saveUI: !uiState.saveUI
-            })
+            // setUiState({
+            //     ...uiState,
+            // saveUI: !uiState.saveUi,
+            // })
+            onPressSaveBtn(postId)
         }
-        // console.log("Touch Screen: userId: " + userId + " postId: " + postId + " key: " + key);
-        // console.log(uiState)
     }
+
+    // func like & unlike
+    const handleLikePost = (pID) => {
+        // console.log(uiState.tymUI);
+        data = {
+            "userId": 1,
+            "postId": pID,
+            "createDate": new Date().toLocaleString()
+        }
+
+        axios.get(`http://192.168.1.2:3000/like?userId=${data.userId}&postId=${data.postId}`)
+            .then((response) => {
+                if (response.data.length == 1) {
+                    // un like
+                    if (uiState.tymUI) {
+                        axios.delete(`http://192.168.1.2:3000/like/${response.data[0].id}`,)
+                            .then(function (res) {
+                                setLikeState(response.data[0], "delete")
+                                setUiState({
+                                    ...uiState,
+                                    tymUI: false,
+                                    countTym: uiState.countTym - 1
+                                })
+                                console.log("Un like success");
+                            })
+                            .catch(e => { console.log(e); })
+                    }
+                } else {
+                    if (!uiState.tymUI) {
+                        //like
+                        axios.post('http://192.168.1.2:3000/like', data)
+                            .then(function (res) {
+                                setLikeState(res.data, "post")
+                                setUiState({
+                                    ...uiState,
+                                    tymUI: true,
+                                    countTym: uiState.countTym + 1
+                                })
+                                console.log("like success");
+                            })
+                            .catch(function (error) {
+                                // handle error
+                                console.log(error);
+                            })
+                    }
+                }
+            })
+            .catch(err => { console.log(error); })
+
+    }
+
+    const onPressCommnetBtn = (pID) => {
+        // console.log(pID);
+        setText('')
+        setUiState({
+            ...uiState,
+            cmtBtn: false
+        })
+
+        const data = {
+            "userId": 1,
+            "postId": pID,
+            "content": text,
+            "createDate": new Date().toLocaleString()
+        }
+        axios.post('http://192.168.1.2:3000/comments?_expand=user', data)
+            .then((res) => {
+                // console.log(res);
+                setComments([...comments,
+                {
+                    "id": res.data.id,
+                    "userId": res.data.userId,
+                    "postId": res.data.postId,
+                    "content": res.data.content,
+                    "createDate": res.data.createDate + "",
+                    "user": {
+                        "id": 1,
+                        "userName": "Binh_4Tui",
+                        "passWord": "123",
+                        "avtSrc": "https://img.pikbest.com/png-images/qiantu/anime-character-avatar-cute-beautiful-girl-second-element-free-button_2652661.png!w700wp",
+                        "follower": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5
+                        ],
+                        "createDate": "31/12/2023  10:08:00"
+                    }
+                }])
+                setPosts(res.data)
+
+                setUiState({ ...uiState, countCmt: uiState.countCmt + 1 })
+
+
+            })
+            .catch(e => console.log(e))
+    }
+
+    const handleChangeComment = (newText) => {
+        setText(newText)
+
+        newText ? setUiState({
+            ...uiState,
+            cmtBtn: true
+        }) : setUiState({
+            ...uiState,
+            cmtBtn: false
+        })
+    }
+
+    const onPressSaveBtn = (pID) => {
+        let data = {
+            "userId": 1,
+            "postId": pID,
+            "createDate": new Date().toLocaleString()
+        }
+
+        axios.get(`http://192.168.1.2:3000/save?userId=1&postId=${pID}`)
+            .then((res) => {
+                if (res.data.length == 1) {
+                    if (uiState.saveUI) {
+
+                        axios.delete(`http://192.168.1.2:3000/save/${res.data[0].id}`,)
+                            .then(function (response) {
+                                setSaveState(res.data[0], "delete")
+                                setUiState({
+                                    ...uiState,
+                                    saveUI: false,
+                                    countSave: uiState.countSave - 1
+                                })
+                                console.log("Un save success");
+                            })
+                            .catch(e => { console.log(e); })
+                    }
+                } else {
+                    if (!uiState.saveUI) {
+                        axios.post(`http://192.168.1.2:3000/save`, data)
+                            .then((response) => {
+                                setSaveState(response.data, "post")
+                                setUiState({
+                                    ...uiState,
+                                    saveUI: true,
+                                    countSave: uiState.countSave + 1
+                                })
+                                console.log("save success");
+                            })
+                            .catch(e => { console.log(e) })
+                    }
+                }
+            })
+            .catch(e => console.log(e))
+
+
+    }
+
 
     return (
 
         // content Interact 
         <View style={styles.contenInteract}>
-
             <View style={styles.contenText}>
                 <View style={styles.contenTextItem}>
                     <Text style={[styles.text, styles.name]}>{userName}</Text>
                 </View>
-                {title ? <View style={styles.contenTextItem}>
-                    <Text style={[styles.text, styles.statusText]}>{title}  {hashtag}</Text>
-                </View> :
-
+                {title ?
+                    <View style={styles.contenTextItem}>
+                        <Text style={[styles.text, styles.statusText]}>{title}  {hashtag}</Text>
+                    </View>
+                    :
                     <View style={styles.contenTextItem}>
                         <Text style={[styles.text, styles.keyTag]}></Text>
                     </View>
-
                 }
-
             </View>
-
             <View style={styles.interact}>
-
                 <View style={styles.interactItem}>
                     <View style={styles.interactItemUser}>
                         <Image
@@ -95,20 +270,20 @@ function ContenInteract(props) {
                 </View>
                 {/* Tym */}
                 <TouchableOpacity
-                    onPress={() => { tuochHandle(userName, id, 'like') }}
+                    onPress={() => { tuochHandle(userName, postID, 'like') }}
                 >
                     <View style={styles.interactItem}>
                         <AntDesign name="heart" color={uiState.tymUI ? "red" : "white"} size={25} ></AntDesign>
-                        {/* <Text style={styles.text}>{tym}</Text> */}
-                        <Text style={styles.text}>{
-                            (tymQuantity > 999999) ? (((tymQuantity + "").substring(0, (tymQuantity + "").length - 6)) + '.M')
+                        <Text style={styles.text}>
+                            {(uiState.countTym > 999999) ? (((uiState.countTym + "").substring(0, (uiState.countTym + "").length - 6)) + '.M')
                                 :
-                                ((tymQuantity > 999) ? (((tymQuantity + "").substring(0, (tymQuantity + "").length - 3)) + '.k') : tymQuantity)}</Text>
+                                ((uiState.countTym > 999) ? (((uiState.countTym + "").substring(0, (uiState.countTym + "").length - 3)) + '.k') : uiState.countTym)}
+                        </Text>
                     </View>
                 </TouchableOpacity>
                 {/* cmt */}
                 <TouchableOpacity
-                    onPress={() => { tuochHandle(userName, id, 'cmt') }}
+                    onPress={() => { tuochHandle(userName, postID, 'cmt') }}
                 >
                     <View style={styles.interactItem}>
                         <Modal
@@ -116,7 +291,7 @@ function ContenInteract(props) {
                             transparent={true}
                             visible={uiState.modalVisible}
                             onRequestClose={() => {
-                                Alert.alert('Modal has been closed.');
+                                // Alert.alert('Modal has been closed.');
                                 setModalVisible(!uiState.modalVisible);
                             }}>
                             <View style={styles.centeredView}>
@@ -135,57 +310,91 @@ function ContenInteract(props) {
                                     <View style={styles.modelContent}>
                                         <View style={styles.cmtItems}>{/*  //ad */}
                                             <ScrollView>
-                                                <View style={styles.cmtItem}>
-                                                    <View style={styles.cmtItemLeft}>
-                                                        <Image
-                                                            height={40}
-                                                            width={40}
-                                                            borderRadius={50}
-                                                            source={{
-                                                                uri: `${avtImg}`,
-                                                            }}
-                                                        ></Image>
-                                                    </View>
-                                                    <View style={styles.cmtItemRight}>
-                                                        <Text style={styles.cmtName}>Binh_4Tui</Text>
-                                                        <Text style={styles.cmtContent}>aksdhakshdakds</Text>
-                                                        <View style={styles.cmtFooter}>
-                                                            <View style={styles.cmtFooterLeft}>
-                                                                <Text style={styles.cmtTime}>30 phut</Text>
-                                                                <Text style={styles.btnReply}>Trả Lời</Text>
-                                                            </View>
-                                                            <View style={styles.cmtFooterRight}>
-                                                                <View style={styles.cmtLike}>
-                                                                    <AntDesign name={'heart'} size={17} color={'red'} />
-                                                                    <Text style={styles.cmtLikeQuantity}>2</Text>
-                                                                </View>
-                                                                <View style={styles.unLike}>
-                                                                    <AntDesign name={'dislike1'} size={17} color={'blue'} />
-                                                                </View>
-                                                            </View>
 
+                                                {comments.map((item, index) => {
+                                                    return (
+                                                        <View key={index} style={styles.cmtItem}>
+                                                            <View style={styles.cmtItemLeft}>
+                                                                <Image
+                                                                    height={40}
+                                                                    width={40}
+                                                                    borderRadius={50}
+                                                                    source={{
+                                                                        uri: `${item.user.avtSrc}`,
+                                                                    }}
+                                                                ></Image>
+                                                            </View>
+                                                            <View style={styles.cmtItemRight}>
+                                                                <Text style={styles.cmtName}>{item.user.userName}</Text>
+                                                                <Text style={styles.cmtContent}>{item.content}</Text>
+                                                                <View style={styles.cmtFooter}>
+                                                                    <View style={styles.cmtFooterLeft}>
+                                                                        <Text style={styles.cmtTime}>{item.createDate}</Text>
+                                                                        <Text style={styles.btnReply}>Trả Lời</Text>
+                                                                    </View>
+                                                                    <View style={styles.cmtFooterRight}>
+                                                                        <View style={styles.cmtLike}>
+                                                                            <AntDesign name={'heart'} size={17} color={'red'} />
+                                                                            <Text style={styles.cmtLikeQuantity}>2</Text>
+                                                                        </View>
+                                                                        <View style={styles.unLike}>
+                                                                            <AntDesign name={'dislike1'} size={17} color={'blue'} />
+                                                                        </View>
+                                                                    </View>
+
+                                                                </View>
+                                                            </View>
                                                         </View>
-                                                    </View>
-                                                </View>
+                                                    );
+                                                })}
+
                                             </ScrollView>
                                         </View>
                                         <View style={styles.cmtView}>
-                                            <View style={styles.cmtAvt}><Image
-                                                // height={30}
-                                                // width={30}
-                                                borderRadius={50}
-                                                source={{
-                                                    uri: `${avtImg}`,
-                                                }}
-                                                style={{
-                                                    width: "100%",
-                                                    height: "100%"
-                                                }}
-                                            ></Image></View>
-                                            <TextInput
-                                                style={styles.cmtInput}
-                                                placeholder='Thêm bình luận...'
-                                            ></TextInput>
+                                            <View style={styles.cmtAvt}>
+                                                <Image
+                                                    borderRadius={50}
+                                                    source={{
+                                                        uri: `${avtImg}`,
+                                                    }}
+                                                    style={{
+                                                        width: "100%",
+                                                        height: "100%"
+                                                    }}
+                                                ></Image>
+                                            </View>
+                                            <View style={styles.cmtInput}>
+                                                <TextInput
+                                                    style={{
+                                                        paddingLeft: 16,
+                                                        // backgroundColor: 'red',
+                                                        flex: 1
+                                                        // width: '50%',
+
+                                                    }}
+                                                    value={text}
+
+                                                    onChangeText={newText => handleChangeComment(newText)}
+                                                    placeholder='Thêm bình luận...'
+                                                />
+                                                {uiState.cmtBtn ?
+                                                    <View style={{
+                                                        flexDirection: 'row',
+                                                        // backgroundColor: 'green',
+                                                        alignItems: 'center',
+                                                    }}>
+                                                        {/* <Text style={{ color: "black", fontSize: 22 }}>@</Text> */}
+                                                        <TouchableOpacity onPress={() => { onPressCommnetBtn(postID) }}>
+                                                            <FontAwesome6 name={'circle-arrow-up'} size={25} color='red' style={{
+                                                                marginHorizontal: 8,
+                                                                backgroundColor: 'white',
+                                                                borderRadius: 50
+                                                            }} />
+                                                        </TouchableOpacity>
+                                                    </View>
+                                                    : null
+                                                }
+                                            </View>
 
                                         </View>
 
@@ -194,27 +403,31 @@ function ContenInteract(props) {
                             </View>
                         </Modal>
                         <FontAwesome name="commenting" color="white" size={25} ></FontAwesome>
-                        {/* <Text style={styles.text}>{cmtQuantity}</Text> */}
-                        <Text style={styles.text}>{
-                            (cmtQuantity > 999) ? (((cmtQuantity + "").substring(0, (cmtQuantity + "").length - 3)) + '.k')
+                        <Text style={styles.text}>
+                            {(uiState.countCmt > 999) ? (((uiState.countCmt + "").substring(0, (uiState.countCmt + "").length - 3)) + '.k')
                                 :
-                                ((cmtQuantity > 99999) ? (((cmtQuantity + "").substring(0, (cmtQuantity + "").length - 6)) + '.M') : cmtQuantity)}</Text>
+                                ((uiState.countCmt > 99999) ? (((uiState.countCmt + "").substring(0, (uiState.countCmt + "").length - 6)) + '.M') : uiState.countCmt)}
+                        </Text>
                     </View >
                 </TouchableOpacity >
                 {/* save */}
                 < TouchableOpacity
-                    onPress={() => { tuochHandle(userName, id, 'save') }
+                    onPress={() => { tuochHandle(userName, postID, 'save') }
                     }
                 >
                     <View style={styles.interactItem}>
-                        <FontAwesome name="bookmark" color={uiState.saveUI ? "yellow" : "white"} size={25}></FontAwesome>
-                        <Text style={styles.text}>{saveQuantity}</Text>
+                        <FontAwesome name="bookmark" color={uiState.saveUI ? "yellow" : "white"} size={25} />
+                        <Text style={styles.text}>
+                            {(uiState.countSave > 999999) ? (((uiState.countSave + "").substring(0, (uiState.countSave + "").length - 6)) + '.M')
+                                :
+                                ((uiState.countSave > 999) ? (((uiState.countSave + "").substring(0, (uiState.countSave + "").length - 3)) + '.k') : uiState.countSave)}
+                        </Text>
                     </View>
                 </TouchableOpacity >
                 {/* share */}
                 < View style={styles.interactItem} >
                     <FontAwesome name="share" color="white" size={25}></FontAwesome>
-                    <Text style={styles.text}>{shareQuantity}</Text>
+                    <Text style={styles.text}></Text>
                 </View >
                 {/* music  */}
                 < View style={[styles.interactItem, styles.interactItemMusic]} >
@@ -469,6 +682,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         flexDirection: 'row',
         paddingBottom: 10,
+        // backgroundColor: 'red'
     },
     cmtAvt: {
         height: "80%",
@@ -480,11 +694,11 @@ const styles = StyleSheet.create({
     cmtInput: {
         width: "80%",
         height: "80%",
-        borderWidth: 1,
-        borderColor: "black",
+        flexDirection: 'row',
         borderRadius: 50,
-        // backgroundColor: "gray",
-        paddingLeft: 15,
+        backgroundColor: "gray",
+        alignItems: 'center',
+        justifyContent: 'space-between'
     }
 
 

@@ -16,12 +16,12 @@ function Main() {
     return (
         // <View></View>
         <SafeAreaView style={styles.container}
-            onLayout={(event) => {
-                const { width, height } = event.nativeEvent.layout;
-                console.log("navigation " + width + " " + height)
-                console.log('Screen ' + screenHeight);
-                console.log('STATUS_BAR_HEIGHT ' + STATUS_BAR_HEIGHT);
-            }}
+        // onLayout={(event) => {
+        //     const { width, height } = event.nativeEvent.layout;
+        //     console.log("navigation " + width + " " + height)
+        //     console.log('Screen ' + screenHeight);
+        //     console.log('STATUS_BAR_HEIGHT ' + STATUS_BAR_HEIGHT);
+        // }}
         >
             {/* <TabVIew></TabVIew> */}
             {/* <View style={{ width: windowWidth, height: windowHeight, flexDirection: 'row' }}>
@@ -39,7 +39,7 @@ function Main() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'yellow',
+        backgroundColor: 'black',
         width: windowWidth,
         height: windowHeight
     },

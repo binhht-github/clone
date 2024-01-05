@@ -17,6 +17,8 @@ import MessengerScreen from '../components/messenger/MessengerScreen';
 import Shop from '../components/shop/Shop';
 import YourUser from '../components/youruser/YourUser';
 import NewPost from '../components/newpost/NewPost';
+import LinearGradient from 'react-native-linear-gradient';
+import PlusIcon from '../../assets/icons/PlusIcon';
 
 
 const Stack = createNativeStackNavigator();
@@ -87,34 +89,31 @@ function HomeTabs({ navigation }) {
                     tabBarLabel: '',
                     // tabBarBadge: 3,
                     tabBarIcon: () => (
-                        <View
-                            style={{
-                                backgroundColor: 'red',
-                                height: 25,
-                                width: 40,
-                                borderRadius: 6,
-                                marginTop: 5,
-                            }}>
-
+                        <LinearGradient colors={['cyan', 'red']} start={{ x: 0, y: 1 }} end={{ x: 1, y: 1 }} style={{
+                            flex: 1, paddingHorizontal: 5,
+                            borderRadius: 5,
+                            margin: 2
+                        }} >
                             <View
                                 style={{
                                     backgroundColor: '#ffffff',
-                                    height: 25,
-                                    marginHorizontal: 5,
                                     borderRadius: 6,
                                     justifyContent: 'center',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    height: '100%',
+                                    width: 30
+                                    // paddingHorizontal: 5
                                     // marginVertical: 10
                                 }}
                             >
-                                <Text>+</Text>
+                                <PlusIcon size={30} color='black' />
                             </View>
-                        </View>
+                        </LinearGradient>
                     ),
                 }}
             />
 
-            <Tab.Screen
+            < Tab.Screen
                 name="MessengerScreen"
                 component={MessengerScreen}
                 options={{
@@ -128,7 +127,7 @@ function HomeTabs({ navigation }) {
                     },
                 }}
             />
-            <Tab.Screen
+            < Tab.Screen
                 name="YourUser"
                 component={YourUser}
                 options={{
@@ -142,7 +141,7 @@ function HomeTabs({ navigation }) {
                     },
                 }}
             />
-        </Tab.Navigator>
+        </Tab.Navigator >
     );
 }
 
