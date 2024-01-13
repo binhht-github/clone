@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import { Fade, Placeholder, PlaceholderLine } from 'rn-placeholder';
 
 const { width } = Dimensions.get('screen')
