@@ -23,25 +23,34 @@ function VideoComp({source = '../public/video/tiktok6.mp4'}, size) {
     mute: false,
     volume: 0.8,
     repeat: true,
-    rate: 0,
+    rate: 1,
   });
   const [currentTime, setCurrentTime] = useState(0);
   const [rankSlider, setRankSlider] = useState({min: 0, max: 0});
 
   // console.log('reload');
   const onPress = () => {
-    // press++;
-    setState({...state, play: !state.play});
-    // const a = setInterval(() => {
-    //   if (press == 1) {
+    press++;
+    const a = setInterval(() => {
+      if (press == 1) {
+        setState({...state, play: !state.play});
+        // console.log('press');
+      }
+      if (press == 2) {
+        console.log('double press');
+      }
+      clearInterval(a);
+      press = 0;
+    }, 260);
+
+    // let count = 0;
+    // const b = setInterval(() => {
+    //   count++;
+    //   if (count == 500) {
+    //     clearInterval(b);
     //   }
-    //   if (press == 2) {
-    //     console.log('double press');
-    //   }
-    //   clearInterval(a);
-    //   press = 0;
-    // }, 260);
-    console.log(state.play);
+    //   console.log('a', count);
+    // }, 1);
   };
 
   const onLoad = data => {
@@ -66,13 +75,12 @@ function VideoComp({source = '../public/video/tiktok6.mp4'}, size) {
       onPress={onPress}
       // onPressIn={onPress}
       // onPressOut={onPress}
-      // onLongPress={() => {
-      //   onTouch('press');
-      // }}
-      // onPressOut={() => {
-      //   onTouch('unPress');
-      // }}
-    >
+      onLongPress={() => {
+        onTouch('press');
+      }}
+      onPressOut={() => {
+        onTouch('unPress');
+      }}>
       <View
         style={{
           position: 'absolute',
@@ -88,7 +96,7 @@ function VideoComp({source = '../public/video/tiktok6.mp4'}, size) {
           audioOnly={true}
           rate={state.rate}
           style={styles.backgroundVideo}
-          // paused={false}
+          paused={!state.play}
           volume={state.volume}
           muted={state.mute}
           // resizeMode={'contain'}
@@ -96,7 +104,7 @@ function VideoComp({source = '../public/video/tiktok6.mp4'}, size) {
           repeat={state.repeat}
           onLoad={onLoad}
           onProgress={onProgress}
-          // onEnd={onEnd}
+          onEnd={onEnd}
           // controls={true}
         />
         {!state.play ? <View style={styles.btnPlay} /> : null}
