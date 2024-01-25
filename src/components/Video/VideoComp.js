@@ -44,27 +44,16 @@ function VideoComp({source = 'https://gdurl.com/U6T8'}, size) {
       clearInterval(a);
       press = 0;
     }, 260);
-
-    // let count = 0;
-    // const b = setInterval(() => {
-    //   count++;
-    //   if (count == 500) {
-    //     clearInterval(b);
-    //   }
-    //   console.log('a', count);
-    // }, 1);
   };
 
   const onLoad = data => {
     const {duration} = data;
-    // console.log('duration ', duration);
     setRankSlider({...rankSlider, max: duration});
   };
 
   const onProgress = data => {
     let {currentTime, playableDuration, seekableDuration} = data;
     setCurrentTime(currentTime);
-    // console.log('time -', currentTime);
   };
 
   const onTouch = status => {};

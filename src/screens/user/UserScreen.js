@@ -18,7 +18,7 @@ const getData = async () => {
 
 function UserScreen() {
   const dispatch = useDispatch();
-  const test = useSelector(state => state.postReducer);
+  const test = useSelector(state => state.persinalInfor);
   return (
     <View>
       <Text>User</Text>
@@ -34,7 +34,7 @@ function UserScreen() {
         title="test action state"
         onPress={() => {
           console.log(
-            'postReducer =================================================================================================================================================',
+            'persinalInfor =================================================================================================================================================',
           );
           console.log(test);
         }}

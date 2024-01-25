@@ -18,10 +18,12 @@ import {useAppDispatch} from './redux/hooks';
 import {setSplash} from './redux/AppInfo/slice';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {logIn} from './reduxs/action/inforAction';
+import {logIn, logInByAsyncStorage} from './reduxs/action/inforAction';
 
 import LoginModalComp from './components/login/LoginModalComp';
 import Navigation from './Navigation/Naigation';
+import {get} from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -32,23 +34,24 @@ function Main() {
   const isSplash = useAppInfoIsSplash();
 
   const dispatch = useAppDispatch();
-  const a = useDispatch();
 
+  const a = useDispatch();
   getData = async () => {
     try {
       const value = await AsyncStorage.getItem('my-key');
       if (value !== null) {
-        console.log(value);
-        a(logIn(value.email, value.passWord));
+        const jsonValue = JSON.parse(value);
+        a(logInByAsyncStorage(jsonValue));
         return value;
       }
     } catch (e) {
-      // error reading value
+      console.log(e);
     }
   };
 
   useEffect(() => {
     dispatch(setSplash(true));
+    getData();
     console.log('check splas ', isSplash);
   }, []);
 
