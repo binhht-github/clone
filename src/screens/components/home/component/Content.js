@@ -13,6 +13,7 @@ import axios from 'axios';
 import PostPlaceHolder from '../../../../components/Post/PostPlaceHolder';
 import FastImage from 'react-native-fast-image';
 import {getMusic} from '../../../../api/music';
+import {getPostFollower, getPostForYou} from '../../../../api/post';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height - 60;
@@ -40,6 +41,32 @@ function Content(props) {
     }
   };
 
+  const fetchPostForYou = async () => {
+    try {
+      const result = await getPostForYou();
+      // console.log(result);
+      setPosts(result.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
+  };
+  const fetchPostFollower = async () => {
+    try {
+      const result = await getPostFollower();
+      // console.log(result);
+      setPostsFollower(result.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
+  };
+
+  useEffect(() => {
+    fetchPostForYou();
+    fetchPostFollower();
+  }, []);
+
   const [posts, setPosts] = useState([]);
   const [postsFollower, setPostsFollower] = useState([]);
 
@@ -49,26 +76,26 @@ function Content(props) {
     'http://192.168.1.7:3000/posts/?userId_ne=1&_embed=like&_embed=save&_embed=comments';
 
   // call api post tru user dang dang nhap
-  useEffect(() => {
-    axios
-      .get(urlForYou)
-      .then(function (response) {
-        setPosts(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
-  useEffect(() => {
-    axios
-      .get(urlFollower)
-      .then(function (response) {
-        setPostsFollower(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(urlForYou)
+  //     .then(function (response) {
+  //       setPosts(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(urlFollower)
+  //     .then(function (response) {
+  //       setPostsFollower(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -88,16 +115,21 @@ function Content(props) {
     if (!e) {
       return;
     }
+
     const {nativeEvent} = e;
     if (nativeEvent && nativeEvent.contentOffset) {
       const currenOffset = nativeEvent.contentOffset.y;
       let itemIndex = 0;
+      let nextIndex = itemIndex + 1;
       if (currenOffset > 0) {
         itemIndex = Math.floor(
           (currenOffset + windowHeight / 2) / windowHeight,
         );
       }
-      // console.log(currenOffset);
+      if (currenOffset % windowHeight == 0) {
+        console.log('active ', itemIndex, 'disable ', itemIndex - 1);
+      }
+      // console.log(currenOffset, ' ', windowHeight);
       // console.log(itemIndex);
     }
   };

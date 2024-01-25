@@ -14,13 +14,15 @@ import {
 
 import reducer from './reducer'
 import saga from './saga'
+import { CREATE_COMMENT } from './Comment/reducer/commentReducer'
+import { UPDATE_TYM_CMT } from './Post/reducer/postReducer'
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   keyPrefix: '',
   whitelist: ['appInfoReducer'],
-  blacklist: ['musicReducer']
+  blacklist: ['musicReducer'],
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)
@@ -31,9 +33,11 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false
+      //   serializableCheck: {
+      //     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, CREATE_COMMENT, UPDATE_TYM_CMT],
+      //     ignoredPaths: ['payload.createDate', 'payload.postReducer.like.createDate', 'like.createDate', 'payload.like.createDate', 'payload.payload.createDate', 'postReducer.like.createDate', 'items.createDate'],
+      //   },
     }).concat(sagaMiddleware),
 })
 sagaMiddleware.run(saga)

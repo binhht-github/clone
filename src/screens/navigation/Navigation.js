@@ -146,8 +146,18 @@ function HomeTabs({navigation}) {
   );
 }
 
+const logIn = () => {
+  <View>
+    <Text>log in</Text>
+  </View>;
+};
+
+import {Provider} from 'react-redux';
+import {stores} from '../../reduxs/stores';
+
 function Navigation() {
   return (
+    // <Provider store={stores}>
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="HomeTabs"
@@ -162,6 +172,7 @@ function Navigation() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    // </Provider>
   );
 }
 

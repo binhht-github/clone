@@ -38,7 +38,6 @@ export const createRequest = (baseUrl: string, timeout: number) => {
       timeout,
       cancelToken: cancelToken ? cancelToken.token : source.token,
     }
-console.log(baseUrl,);
 
     return {
       /**
@@ -47,8 +46,8 @@ console.log(baseUrl,);
        */
       get: <T = any, R = AxiosResponse<T>>(url: string, options: AxiosRequestConfig = {}) =>
 
-        {
-          console.log('url ',url);
+        { 
+          // console.log(url);
           
           return(
           axios.get<T, R>(isCDNApi ? withTimestamp(url) : url, {

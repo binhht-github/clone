@@ -8,7 +8,8 @@ import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import axios from 'axios';
 import TestComponents from '../../../../components/TestComponents';
 import VideoComp from '../../../../components/Video/VideoComp';
-import UserComp from '../../../../components/User/UserComp';
+import UserComp from '../../../../components/User/AvtUserComp';
+import PostComp from '../../../../components/Post/PostComp';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height - 60;
@@ -23,16 +24,17 @@ function TopTabNavigation(props) {
 
   const FirstRoute = props => (
     // <Content posts={postsFollower} />
-    <View
-      style={{
-        width: windowWidth,
-        height: windowHeight,
-        // backgroundColor: 'red',
-      }}>
-      {/* <TestComponents /> */}
-      <VideoComp />
-      {/* <UserComp /> */}
-    </View>
+    // <View
+    //   style={{
+    //     width: windowWidth,
+    //     height: windowHeight,
+    //     // backgroundColor: 'red',
+    //   }}>
+    //   {/* <TestComponents /> */}
+    // <VideoComp />
+    // <UserComp />
+    // </View>
+    <PostComp />
   );
 
   const SecondRoute = () => (
@@ -105,9 +107,10 @@ function TopTabNavigation(props) {
             activeColor="white"
             inactiveColor="hsla(50,0%,88%,1)"
             style={{
-              backgroundColor: 'hsla(255,255,255,0)',
+              backgroundColor: 'hsla(255,255,255,1)',
+              // backgroundColor: 'red',
               width: windowWidth - 50,
-              left: -10,
+              left: -6,
             }}
             indicatorStyle={{
               backgroundColor: 'white',

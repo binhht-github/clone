@@ -19,6 +19,9 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Moment from 'moment';
 import ContenInteractReplyCmt from './ContenInteractReplyCmt';
+import {useDispatch, useSelector} from 'react-redux';
+import AvtUserComp from '../../../../components/User/AvtUserComp';
+import {uiLogInActionOpen} from '../../../../reduxs/action/uiLogInAction';
 
 const widthWindown = Dimensions.get('window').width;
 
@@ -40,10 +43,9 @@ function ContenInteract(props) {
     setSaveState,
   } = props;
 
-  // let checkSaveUI;
-
+  const infor = useSelector(state => state.persinalInfor);
+  const dispatch = useDispatch();
   // Moment.locale('vi')
-
   const [comments, setComments] = useState([]);
   const [text, setText] = useState('');
   const [uiState, setUiState] = useState({
@@ -77,7 +79,7 @@ function ContenInteract(props) {
       if (!uiState.modalVisible) {
         axios
           .get(
-            `http://192.168.1.7:3000/comments/?_expand=user&postId=${postID}`,
+            `http://192.168.1.3:3000/comments/?_expand=user&postId=${postID}`,
           )
           .then(res => {
             setComments(res.data);
@@ -101,21 +103,21 @@ function ContenInteract(props) {
   const handleLikePost = pID => {
     // console.log(uiState.tymUI);
     data = {
-      userId: 1,
+      userId: infor ? infor.id : 1,
       postId: pID,
       createDate: Moment(),
     };
 
     axios
       .get(
-        `http://192.168.1.7:3000/like?userId=${data.userId}&postId=${data.postId}`,
+        `http://192.168.1.3:3000/like?userId=${data.userId}&postId=${data.postId}`,
       )
       .then(response => {
         if (response.data.length == 1) {
           // un like
           if (uiState.tymUI) {
             axios
-              .delete(`http://192.168.1.7:3000/like/${response.data[0].id}`)
+              .delete(`http://192.168.1.3:3000/like/${response.data[0].id}`)
               .then(function (res) {
                 setLikeState(response.data[0], 'delete');
                 setUiState({
@@ -133,7 +135,7 @@ function ContenInteract(props) {
           if (!uiState.tymUI) {
             //like
             axios
-              .post('http://192.168.1.7:3000/like', data)
+              .post('http://192.168.1.3:3000/like', data)
               .then(function (res) {
                 setLikeState(res.data, 'post');
                 setUiState({
@@ -164,13 +166,13 @@ function ContenInteract(props) {
     });
 
     const data = {
-      userId: 1,
+      userId: infor ? infor.id : 1,
       postId: pID,
       content: text,
       createDate: Moment(),
     };
     axios
-      .post('http://192.168.1.7:3000/comments?_expand=user', data)
+      .post('http://192.168.1.3:3000/comments?_expand=user', data)
       .then(res => {
         // console.log(res);
         setComments([
@@ -182,11 +184,12 @@ function ContenInteract(props) {
             content: res.data.content,
             createDate: res.data.createDate + '',
             user: {
-              id: 1,
-              userName: 'Binh_4Tui',
-              passWord: '123',
-              avtSrc:
-                'https://img.pikbest.com/png-images/qiantu/anime-character-avatar-cute-beautiful-girl-second-element-free-button_2652661.png!w700wp',
+              id: infor ? infor.id : 1,
+              userName: infor ? infor.userName : 'Binh_4Tui',
+              passWord: infor ? infor.passWord : '123',
+              avtSrc: infor
+                ? infor.avtSrc
+                : 'https://img.pikbest.com/png-images/qiantu/anime-character-avatar-cute-beautiful-girl-second-element-free-button_2652661.png!w700wp',
               follower: [1, 2, 3, 4, 5],
               createDate: '31/12/2023  10:08:00',
             },
@@ -215,18 +218,18 @@ function ContenInteract(props) {
 
   const onPressSaveBtn = pID => {
     let data = {
-      userId: 1,
+      userId: infor ? infor.id : 1,
       postId: pID,
       createDate: Moment(),
     };
 
     axios
-      .get(`http://192.168.1.7:3000/save?userId=1&postId=${pID}`)
+      .get(`http://192.168.1.3:3000/save?userId=1&postId=${pID}`)
       .then(res => {
         if (res.data.length == 1) {
           if (uiState.saveUI) {
             axios
-              .delete(`http://192.168.1.7:3000/save/${res.data[0].id}`)
+              .delete(`http://192.168.1.3:3000/save/${res.data[0].id}`)
               .then(function (response) {
                 setSaveState(res.data[0], 'delete');
                 setUiState({
@@ -243,7 +246,7 @@ function ContenInteract(props) {
         } else {
           if (!uiState.saveUI) {
             axios
-              .post(`http://192.168.1.7:3000/save`, data)
+              .post(`http://192.168.1.3:3000/save`, data)
               .then(response => {
                 setSaveState(response.data, 'post');
                 setUiState({
@@ -382,13 +385,10 @@ function ContenInteract(props) {
                               <View key={index}>
                                 <View style={styles.cmtItem}>
                                   <View style={styles.cmtItemLeft}>
-                                    <Image
-                                      height={40}
-                                      width={40}
-                                      borderRadius={50}
-                                      source={{
-                                        uri: `${item.user.avtSrc}`,
-                                      }}></Image>
+                                    <AvtUserComp
+                                      size={40}
+                                      source={item.user.avtSrc}
+                                    />
                                   </View>
                                   <View style={styles.cmtItemRight}>
                                     <Text style={styles.cmtName}>
@@ -460,15 +460,7 @@ function ContenInteract(props) {
                     )}
                     <View style={styles.cmtView}>
                       <View style={styles.cmtAvt}>
-                        <Image
-                          borderRadius={50}
-                          source={{
-                            uri: `${avtImg}`,
-                          }}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                          }}></Image>
+                        <AvtUserComp size={40} source={infor.avtSrc} />
                       </View>
                       <View style={styles.cmtInput}>
                         <TextInput
@@ -480,7 +472,14 @@ function ContenInteract(props) {
                           }}
                           value={text}
                           onChangeText={newText => handleChangeComment(newText)}
+                          onFocus={() => {
+                            if (infor.id === '') {
+                              dispatch(uiLogInActionOpen());
+                            }
+                          }}
+                          // showSoftInputOnFocus={infor.id === '' ? false : true}
                           placeholder="Thêm bình luận..."
+                          // showSoftInputOnFocus={true}
                         />
                         {uiState.cmtBtn ? (
                           <View
@@ -492,7 +491,9 @@ function ContenInteract(props) {
                             {/* <Text style={{ color: "black", fontSize: 22 }}>@</Text> */}
                             <TouchableOpacity
                               onPress={() => {
-                                onPressCommnetBtn(postID);
+                                infor.id != ''
+                                  ? onPressCommnetBtn(postID)
+                                  : dispatch(uiLogInActionOpen);
                               }}>
                               <FontAwesome6
                                 name={'circle-arrow-up'}

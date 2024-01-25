@@ -14,8 +14,10 @@ const windowHeight = Dimensions.get('window').height - 60;
 
 let press = 0;
 let lastPress = 0;
-function VideoComp({source = '../public/video/tiktok6.mp4'}, size) {
+function VideoComp({source = 'https://gdurl.com/U6T8'}, size) {
+  // let url = require('../../public/video/tiktok1.mp4');
   let url = require('../../public/video/tiktok1.mp4');
+
   const videoPlayer = useRef(null);
 
   const [state, setState] = useState({
@@ -89,7 +91,13 @@ function VideoComp({source = '../public/video/tiktok6.mp4'}, size) {
           backgroundColor: '#000',
         }}>
         <Video
-          source={url}
+          // source={url}
+          source={{
+            uri: source,
+          }}
+          // source={{
+          //   uri: 'https://drive.google.com/uc?export=download&id=1CulocoWr8u9hGppxH1rG4JEg0JE8MJ7s',
+          // }}
           ref={videoPlayer}
           onBuffer={this.onBuffer}
           onError={this.videoError}
@@ -99,8 +107,8 @@ function VideoComp({source = '../public/video/tiktok6.mp4'}, size) {
           paused={!state.play}
           volume={state.volume}
           muted={state.mute}
-          // resizeMode={'contain'}
-          resizeMode={'cover'}
+          resizeMode={'contain'}
+          // resizeMode={'cover'}
           repeat={state.repeat}
           onLoad={onLoad}
           onProgress={onProgress}

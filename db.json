@@ -2,6 +2,7 @@
   "users": [
     {
       "id": 1,
+      "email": "binh@gmail.com",
       "userName": "Binh_4Tui",
       "passWord": "123",
       "avtSrc": "https://img.pikbest.com/png-images/qiantu/anime-character-avatar-cute-beautiful-girl-second-element-free-button_2652661.png!w700wp",
@@ -16,6 +17,7 @@
     },
     {
       "id": 2,
+      "email": "nam@gmail.com",
       "userName": "Nam nguyen",
       "passWord": "123",
       "avtSrc": "https://canhquannhaxanh.com/wp-content/uploads/2023/05/avatar-gai-xinh-41.jpg",
@@ -28,6 +30,7 @@
     },
     {
       "id": 3,
+      "email": "meo@gmail.com",
       "userName": "MeowMeow",
       "passWord": "123",
       "avtSrc": "https://scr.vn/wp-content/uploads/2020/08/H%C3%ACnh-%C4%91%E1%BA%A1i-di%E1%BB%87n-g%C3%A1i-xinh-%C4%91%E1%BA%B9p.jpg",
@@ -36,7 +39,8 @@
     },
     {
       "id": 4,
-      "userName": "Photograper",
+      "email": "truong@gmail.com",
+      "userName": "Truong Photograper",
       "passWord": "123",
       "avtSrc": "https://i.pinimg.com/736x/68/7f/f5/687ff58b82cf34da0cd1369598f22104.jpg",
       "follower": [],
@@ -44,6 +48,7 @@
     },
     {
       "id": 5,
+      "email": "ken@gmail.com",
       "userName": "kenzyn99",
       "passWord": "123",
       "avtSrc": "https://www.vietnamfineart.com.vn/wp-content/uploads/2023/03/15349541_533868826819201_3350340522319981193_n-5.jpg",
@@ -55,7 +60,7 @@
     {
       "shareQuantity": 60,
       "title": "title 1",
-      "hashtag": "hashtag 1",
+      "hashtag": "#hashtag1",
       "potsType": "img",
       "music": "music 1",
       "avtImg": "https://cungcau.qltns.mediacdn.vn/421196537165905920/2022/12/25/hinh-nen-gai-xinh-hd-1-16719638820711104326521.jpg",
@@ -68,7 +73,7 @@
     {
       "shareQuantity": 81,
       "title": "title 2",
-      "hashtag": "hashtag 2",
+      "hashtag": "#hashtag2",
       "potsType": "img",
       "music": "music 2",
       "avtImg": "https://media.muanhatructuyen.vn/post/221/31/3/hinh-nen-gai-xinh-trong-bo-ao-vang-ngo-nghinh.jpg",
@@ -81,7 +86,7 @@
     {
       "shareQuantity": 51,
       "title": "title 3",
-      "hashtag": "hashtag 3",
+      "hashtag": "#hashtag3",
       "potsType": "img",
       "music": "music 3",
       "avtImg": "https://meliawedding.com.vn/wp-content/uploads/2022/05/hinh-nen-gai-xinh-19-1-edited.jpg",
@@ -94,11 +99,11 @@
     {
       "shareQuantity": 52,
       "title": "title 4",
-      "hashtag": "hashtag 4",
-      "potsType": "img",
+      "hashtag": "#hashtag4",
+      "potsType": "video",
       "music": "music 4",
       "avtImg": "https://i.9mobi.vn/cf/Images/huy/2021/12/6/hinh-nen-girl-xinh-7.jpg",
-      "src": "https://i.9mobi.vn/cf/Images/huy/2021/12/6/hinh-nen-girl-xinh-7.jpg",
+      "src": "https://gdurl.com/U6T8",
       "musicImg": "https://i.9mobi.vn/cf/Images/huy/2021/12/6/hinh-nen-girl-xinh-7.jpg",
       "createDate": "createDate 4",
       "id": 4,
@@ -107,11 +112,11 @@
     {
       "shareQuantity": 32,
       "title": "title 5",
-      "hashtag": "hashtag 5",
-      "potsType": "img",
+      "hashtag": "#hashtag5",
+      "potsType": "video",
       "music": "",
       "avtImg": "https://i.9mobi.vn/cf/Images/huy/2021/12/6/hinh-nen-girl-xinh-2.jpg",
-      "src": "https://i.9mobi.vn/cf/Images/huy/2021/12/6/hinh-nen-girl-xinh-2.jpg",
+      "src": "https://gdurl.com/jdR0",
       "musicImg": "https://i.9mobi.vn/cf/Images/huy/2021/12/6/hinh-nen-girl-xinh-2.jpg",
       "createDate": "createDate 5",
       "id": 5,
@@ -120,7 +125,7 @@
     {
       "shareQuantity": 46,
       "title": "title 6",
-      "hashtag": "hashtag 6",
+      "hashtag": "#hashtag6",
       "potsType": "img",
       "music": "",
       "avtImg": "https://khoinguonsangtao.vn/wp-content/uploads/2022/08/anh-gai-xinh-hot-girl-cute.jpg",
@@ -133,7 +138,7 @@
     {
       "shareQuantity": 93,
       "title": "title 7",
-      "hashtag": "hashtag 7",
+      "hashtag": "#hashtag7",
       "potsType": "img",
       "music": "music 7",
       "avtImg": "https://thuthuatnhanh.com/wp-content/uploads/2020/09/hinh-nen-gai-xinh-hd.jpg",
@@ -146,7 +151,7 @@
     {
       "shareQuantity": 87,
       "title": "title 8",
-      "hashtag": "hashtag 8",
+      "hashtag": "#hashtag8",
       "potsType": "img",
       "music": "music 8",
       "avtImg": "https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/01/tai-hinh-nen-gai-dep-ve-may.jpg",
@@ -159,7 +164,7 @@
     {
       "shareQuantity": 73,
       "title": "title 9",
-      "hashtag": "hashtag 9",
+      "hashtag": "#hashtag9",
       "potsType": "img",
       "music": "music 9",
       "avtImg": "https://i1.sndcdn.com/artworks-oSLwusnOZCsTWUY4-ysX9FQ-t500x500.jpg",
@@ -172,7 +177,7 @@
     {
       "shareQuantity": 60,
       "title": "title 10",
-      "hashtag": "hashtag 10",
+      "hashtag": "#hashtag10",
       "potsType": "img",
       "music": "music 10",
       "avtImg": "https://i.ytimg.com/vi/Li01nftGNKQ/maxresdefault.jpg",
@@ -185,7 +190,7 @@
     {
       "shareQuantity": 5,
       "title": "title 11",
-      "hashtag": "hashtag 11",
+      "hashtag": "#hashtag11",
       "potsType": "img",
       "music": "music 11",
       "avtImg": "https://haycafe.vn/wp-content/uploads/2022/02/Hinh-nen-gai-xinh-cap-2-3-mac-ao-dai-dep.jpg",
@@ -198,7 +203,7 @@
     {
       "shareQuantity": 2,
       "title": "title 12",
-      "hashtag": "hashtag 12",
+      "hashtag": "#hashtag12",
       "potsType": "img",
       "music": "music 12",
       "avtImg": "https://honghot.net/wp-content/uploads/www_HongHot_net-Hinh-nen-girl-xinh-dien-thoai-1.jpg",
@@ -211,7 +216,7 @@
     {
       "shareQuantity": 75,
       "title": "title 13",
-      "hashtag": "hashtag 13",
+      "hashtag": "#hashtag13",
       "potsType": "img",
       "music": "music 13",
       "avtImg": "https://mas.edu.vn/wp-content/uploads/2022/08/hinh-nen-gai-xinh-3-1-522x1024.jpg",
@@ -224,7 +229,7 @@
     {
       "shareQuantity": 26,
       "title": "title 14",
-      "hashtag": "hashtag 14",
+      "hashtag": "#hashtag14",
       "potsType": "img",
       "music": "music 14",
       "avtImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEl9TYijvx-4IP6_YpNTAhpm2Rh-pVUmIn9yxoYPGi-JzHHajQoX4TSiafIs0G4UEqPHc&usqp=CAU",
@@ -237,7 +242,7 @@
     {
       "shareQuantity": 46,
       "title": "title 15",
-      "hashtag": "hashtag 15",
+      "hashtag": "#hashtag15",
       "potsType": "img",
       "music": "music 15",
       "avtImg": "https://img2.thuthuatphanmem.vn/uploads/2019/02/22/hinh-nen-gai-xinh-2k-cho-pc_121750528.jpg",
@@ -250,7 +255,7 @@
     {
       "shareQuantity": 26,
       "title": "title 16",
-      "hashtag": "hashtag 16",
+      "hashtag": "#hashtag16",
       "potsType": "img",
       "music": "music 16",
       "avtImg": "https://icdn.dantri.com.vn/2018/12/25/co-gai-nong-thon-dep-diu-dang-13-1545741190739100518761.jpg",
@@ -263,7 +268,7 @@
     {
       "shareQuantity": 18,
       "title": "title 17",
-      "hashtag": "hashtag 17",
+      "hashtag": "#hashtag17",
       "potsType": "img",
       "music": "music 17",
       "avtImg": "https://haycafe.vn/wp-content/uploads/2022/02/Hinh-gai-xinh-de-thuong-keo-toc-338x600.jpg",
@@ -276,7 +281,7 @@
     {
       "shareQuantity": 50,
       "title": "title 18",
-      "hashtag": "hashtag 18",
+      "hashtag": "#hashtag18",
       "potsType": "img",
       "music": "music 18",
       "avtImg": "https://antimatter.vn/wp-content/uploads/2022/10/hinh-anh-gai-xinh-de-thuong-457x600.jpg",
@@ -289,7 +294,7 @@
     {
       "shareQuantity": 14,
       "title": "title 19",
-      "hashtag": "hashtag 19",
+      "hashtag": "#hashtag19",
       "potsType": "img",
       "music": "music 19",
       "avtImg": "https://inkythuatso.com/uploads/thumbnails/800/2022/06/hinh-nen-em-be-gai-cho-dien-thoai-8-07-11-53-24.jpg",
@@ -302,7 +307,7 @@
     {
       "shareQuantity": 63,
       "title": "title 20",
-      "hashtag": "hashtag 20",
+      "hashtag": "#hashtag20",
       "potsType": "img",
       "music": "music 20",
       "avtImg": "https://img.thuthuat123.com/uploads/2019/10/17/hinh-nen-gai-xinh-cho-dien-thoai-cuc-dep_110154166.jpg",
@@ -315,7 +320,7 @@
     {
       "shareQuantity": 28,
       "title": "title 21",
-      "hashtag": "hashtag 21",
+      "hashtag": "#hashtag21",
       "potsType": "img",
       "music": "music 21",
       "avtImg": "https://i.pinimg.com/1200x/20/ca/4f/20ca4fd02972bbae35500a6e7a336b7f.jpg",
@@ -328,7 +333,7 @@
     {
       "shareQuantity": 43,
       "title": "title 22",
-      "hashtag": "hashtag 22",
+      "hashtag": "#hashtag22",
       "potsType": "img",
       "music": "music 22",
       "avtImg": "https://www.dungplus.com/wp-content/uploads/2019/12/girl-xinh-6-600x600.jpg",
@@ -341,7 +346,7 @@
     {
       "shareQuantity": 51,
       "title": "title 23",
-      "hashtag": "hashtag 23",
+      "hashtag": "#hashtag23",
       "potsType": "img",
       "music": "music 23",
       "avtImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeYTzJEQ6aAgMB4IRD17arTivhBPhQbSz9FdD0b-Xp0gZiQ-mamz09mm7y5V0nM_exEyo&usqp=CAU",
@@ -354,7 +359,7 @@
     {
       "shareQuantity": 81,
       "title": "title 24",
-      "hashtag": "hashtag 24",
+      "hashtag": "#hashtag24",
       "potsType": "img",
       "music": "music 24",
       "avtImg": "https://luv.vn/wp-content/uploads/2021/10/hinh-nen-gai-xinh-50.jpg",
@@ -363,50 +368,35 @@
       "createDate": "createDate 24",
       "id": 24,
       "userId": 1
+    },
+    {
+      "shareQuantity": 81,
+      "title": "title 25",
+      "hashtag": "#hashtag25",
+      "potsType": "video",
+      "music": "music 25",
+      "avtImg": "https://luv.vn/wp-content/uploads/2021/10/hinh-nen-gai-xinh-50.jpg",
+      "src": "https://gdurl.com/NwnZ",
+      "musicImg": "https://luv.vn/wp-content/uploads/2021/10/hinh-nen-gai-xinh-50.jpg",
+      "createDate": "createDate 25",
+      "id": 25,
+      "userId": 3
     }
   ],
   "comments": [
     {
-      "userId": 1,
+      "userId": 5,
       "postId": 3,
-      "content": "A efdd",
-      "createDate": "2023-12-05T15:30:13.374Z",
-      "id": 4
+      "content": "Iuhb",
+      "createDate": "2024-01-22T09:37:10.194Z",
+      "id": 1
     },
     {
-      "userId": 1,
-      "postId": 4,
-      "content": "Xinh",
-      "createDate": "2024-01-04T15:35:00.052Z",
-      "id": 5
-    },
-    {
-      "userId": 1,
-      "postId": 4,
-      "content": "atrf",
-      "createDate": "2024-01-05T15:44:27.884Z",
-      "id": 6
-    },
-    {
-      "userId": 1,
-      "postId": 3,
-      "content": "F",
-      "createDate": "2024-01-05T16:13:28.347Z",
-      "id": 7
-    },
-    {
-      "userId": 1,
-      "postId": 3,
-      "content": "Ha",
-      "createDate": "2024-01-12T14:27:28.989Z",
-      "id": 8
-    },
-    {
-      "userId": 1,
-      "postId": 19,
-      "content": "Cute",
-      "createDate": "2024-01-12T15:16:54.193Z",
-      "id": 9
+      "userId": 5,
+      "postId": 18,
+      "content": "Uhhb",
+      "createDate": "2024-01-24T14:20:58.515Z",
+      "id": 2
     }
   ],
   "like": [
@@ -433,20 +423,98 @@
       "postId": 19,
       "createDate": "2024-01-12T15:17:10.247Z",
       "id": 4
+    },
+    {
+      "userId": 5,
+      "postId": 25,
+      "createDate": "2024-01-15T09:19:43.360Z",
+      "id": 5
+    },
+    {
+      "userId": 5,
+      "postId": 4,
+      "createDate": "2024-01-22T15:35:37.053Z",
+      "id": 7
+    },
+    {
+      "userId": 5,
+      "postId": 12,
+      "createDate": "2024-01-22T15:39:15.142Z",
+      "id": 9
+    },
+    {
+      "userId": 5,
+      "postId": 3,
+      "createDate": "2024-01-24T13:54:02.083Z",
+      "id": 10
+    },
+    {
+      "userId": 5,
+      "postId": 5,
+      "createDate": "2024-01-24T13:59:41.926Z",
+      "id": 11
+    },
+    {
+      "userId": 5,
+      "postId": 7,
+      "createDate": "2024-01-24T14:49:55.716Z",
+      "id": 12
+    },
+    {
+      "userId": 5,
+      "postId": 8,
+      "createDate": "2024-01-24T14:50:02.548Z",
+      "id": 13
+    },
+    {
+      "userId": 5,
+      "postId": 10,
+      "createDate": "2024-01-24T14:50:06.141Z",
+      "id": 14
+    },
+    {
+      "userId": 5,
+      "postId": 14,
+      "createDate": "2024-01-24T14:50:13.076Z",
+      "id": 15
     }
   ],
   "save": [
     {
       "userId": 1,
       "postId": 3,
-      "createDate": "2024-01-05T14:48:24.658Z",
+      "createDate": "2024-01-05T14:48:23.359Z",
       "id": 1
     },
     {
-      "userId": 1,
-      "postId": 8,
-      "createDate": "2024-01-12T14:42:02.458Z",
+      "userId": 5,
+      "postId": 3,
+      "createDate": "2024-01-24T14:48:17.031Z",
       "id": 2
+    },
+    {
+      "userId": 5,
+      "postId": 7,
+      "createDate": "2024-01-24T14:49:53.268Z",
+      "id": 3
+    },
+    {
+      "userId": 5,
+      "postId": 8,
+      "createDate": "2024-01-24T14:50:03.851Z",
+      "id": 4
+    },
+    {
+      "userId": 5,
+      "postId": 10,
+      "createDate": "2024-01-24T14:50:07.065Z",
+      "id": 5
+    },
+    {
+      "userId": 5,
+      "postId": 14,
+      "createDate": "2024-01-24T14:50:12.324Z",
+      "id": 6
     }
   ]
 }
